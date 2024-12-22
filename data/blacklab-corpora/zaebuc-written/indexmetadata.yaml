@@ -1,0 +1,132 @@
+---
+displayName: "ZAEBUC written corpus"
+description: "Zayed Bilingual Undergraduate Corpus"
+contentViewable: true
+textDirection: "rtl"
+documentFormat: "zaebuc-input-format"
+tokenCount: 1795
+versionInfo:
+  blackLabBuildTime: "2022-10-06 13:11:40"
+  blackLabVersion: "3.0.1"
+  indexFormat: "3.1"
+  timeCreated: "2024-12-22 12:52:54"
+  timeModified: "2024-12-22 12:52:54"
+  alwaysAddClosingToken: true
+  tagLengthInPayload: true
+fieldInfo:
+  namingScheme: "DEFAULT"
+  defaultAnalyzer: "default"
+  unknownCondition: "never"
+  unknownValue: "unknown"
+  titleField: "idx"
+  metadataFieldGroups: []
+  annotationGroups: {}
+  metadataFields:
+    fromInputFile:
+      displayName: "From input file"
+      uiType: ""
+      description: ""
+      type: "untokenized"
+      analyzer: "DEFAULT"
+      unknownValue: "unknown"
+      unknownCondition: "NEVER"
+      valueListComplete: true
+      values:
+        /Users/f/Library/CloudStorage/SynologyDrive-ba3sasah/zaebuc/corpus_app/data/zaebuc_written.xml: 16
+      displayValues: {}
+      displayOrder: []
+    idx:
+      displayName: "Idx"
+      uiType: ""
+      description: ""
+      type: "tokenized"
+      analyzer: "DEFAULT"
+      unknownValue: "unknown"
+      unknownCondition: "NEVER"
+      valueListComplete: true
+      values:
+        AR-030-89249: 1
+        EN-140-119150: 1
+        AR-030-268469: 1
+        AR-030-87953: 1
+        AR-030-90528: 1
+        EN-140-121991844: 1
+        AR-030-386369: 1
+        AR-030-85891: 1
+        AR-030-89881: 1
+        EN-140-119813: 1
+        AR-030-81757: 1
+        EN-140-117417: 1
+        EN-140-119831: 1
+        AR-030-81027: 1
+        EN-140-116710: 1
+        AR-030-83625: 1
+      displayValues: {}
+      displayOrder: []
+    textDirection:
+      displayName: "Text direction"
+      uiType: ""
+      description: ""
+      type: "tokenized"
+      analyzer: "DEFAULT"
+      unknownValue: "unknown"
+      unknownCondition: "NEVER"
+      valueListComplete: true
+      values:
+        rtl: 10
+        ltr: 6
+      displayValues: {}
+      displayOrder: []
+  complexFields:
+    contents:
+      displayName: "Contents"
+      description: "Contents of the documents."
+      mainProperty: "gloss"
+      displayOrder:
+      - "gloss"
+      - "word"
+      - "lemma"
+      - "tokenized"
+      - "pos"
+      - "gloss_full"
+      annotations:
+      - name: "gloss"
+        displayName: "Gloss"
+        description: ""
+        uiType: ""
+        isInternal: false
+      - name: "word"
+        displayName: "Word"
+        description: ""
+        uiType: ""
+        isInternal: false
+      - name: "lemma"
+        displayName: "Lemma"
+        description: ""
+        uiType: ""
+        isInternal: false
+      - name: "tokenized"
+        displayName: "Tokenized"
+        description: ""
+        uiType: ""
+        isInternal: false
+      - name: "pos"
+        displayName: "PoS"
+        description: ""
+        uiType: ""
+        isInternal: false
+      - name: "gloss_full"
+        displayName: "GlossFull"
+        description: ""
+        uiType: ""
+        isInternal: false
+      - name: "starttag"
+        displayName: "Starttag"
+        description: ""
+        uiType: ""
+        isInternal: true
+      - name: "punct"
+        displayName: "Punct"
+        description: ""
+        uiType: ""
+        isInternal: true
