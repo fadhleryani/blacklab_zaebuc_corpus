@@ -1,0 +1,16 @@
+#make sure tomcat is using jdk11, by checking tomcat@9/bin/catalina, e.g.
+JAVA_HOME:-Users/f/.jenv/versions/openjdk64-11.0.18
+or explicityly /opt/homebrew/Cellar/openjdk@11/11.0.23/libexec/openjdk.jdk/Contents/Home/
+
+
+# restart tomcat 
+brew services restart tomcat@9
+
+# cp wars to tomcat, removing version numbers in copy
+cp src/blacklab-server-3.0.1.war /opt/homebrew/opt/tomcat@9/libexec/webapps/blacklab-server.war
+cp src/corpus-frontend-3.1.1.war /opt/homebrew/opt/tomcat@9/libexec/webapps/corpus-frontend.war
+
+# Create setenv.sh in /opt/homebrew/opt/tomcat@9/libexec/bin/ with following line:
+export BLACKLAB_CONFIG_DIR=~/ba3sasah/zaebuc/corpus_app/blacklab_configs
+##NOTE! this did not work, so we cp to ~/.blacklab
+sudo cp -r blacklab_configs/ ~/.blacklab/ 

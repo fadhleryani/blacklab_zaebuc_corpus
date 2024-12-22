@@ -1,0 +1,102 @@
+# For displaying in user interface (optional)
+displayName: "Custom format for ZAEBUC corpus"
+
+# For describing input format in user interface (optional)
+# description: A TEI P5 variant where part of speech is expected to be in the type attribute. Deprecated, will be removed eventually.
+
+# helpUrl: http://www.tei-c.org/Guidelines/P5/
+corpusConfig:
+  # Display name for the corpus
+  displayName: ZAEBUC written corpus
+  # Short description for the corpus 
+  description: Zayed Bilingual Undergraduate Corpus
+  # Is the user allowed to view whole documents in the search interface?
+  # (used by BLS to either allow or disallow fetching full document content)
+  # (defaults to false because this is not allowed for some datasets)
+  contentViewable: true
+  textDirection: 'rtl'
+  
+  specialFields:
+    pidField: idx
+
+# (Optional, informational)
+# content, metadata or mixed?
+# (not used by BlackLab, purely informational for the frontend application)
+type: mixed
+
+# What element starts a new document?
+# (the only absolute XPath; the rest is relative)
+documentPath: //doc
+
+# Annotated, CQL-searchable fields.
+# We usually have just one, named "contents".
+annotatedFields:
+
+  contents:
+
+    # How to display the field in the interface (optional)
+    displayName: Contents
+
+    # How to describe the field in the interface (optional)
+    description: Contents of the documents.
+
+    # What element (relative to document) contains this field's contents?
+    # (if omitted, entire document is used)
+    # containerPath: .//text
+
+    # What are our word tags? (relative to container)
+    wordPath: .//word     # (body geldt niet voor OpenSonar, maar ter illustratie)
+
+    # Punctuation between word tags (relative to container)
+    punctPath: .//text()[not(ancestor::word)]   # = "all text nodes (under containerPath) not inside a <w/> element"
+
+    # What annotation can each word have? How do we index them?
+    # (valuePaths relative to word path)
+    # NOTE: forEachPath is NOT allowed for annotations, because we need to know all annotations before indexing,
+    #       and with forEachPath you could run in to an unknown new annotation mid-way through.
+    annotations:
+    # First annotation is the main annotation
+    - name: gloss
+      displayName: Gloss
+      valuePath: gloss/@class
+      multipleValues: true
+      sensitivity: sensitive_insensitive
+    - name: word
+      displayName: Word
+      valuePath: text
+      sensitivity: sensitive_insensitive
+    - name: lemma
+      displayName: Lemma
+      valuePath: manual_lemma/@class
+      sensitivity: sensitive_insensitive
+    - name: tokenized
+      displayName: Tokenized
+      valuePath: manual_tokenization/@class
+      sensitivity: sensitive_insensitive
+    - name: pos
+      displayName: PoS
+      valuePath: manual_pos/@class
+      sensitivity: sensitive_insensitive
+    - name: gloss_full
+      displayName: GlossFull
+      valuePath: gloss_full/@class
+      sensitivity: sensitive_insensitive
+
+    # XML tags within the content we'd like to index
+    # (relative to container)
+    inlineTags:
+    # - path: .//doc   # Document
+    - path: .//sent   # Sentence
+    # - path: .//pb  # Page beginning
+    # - path: .//lb  # Line beginning
+
+
+metadata:
+  containerPath: .
+  fields:
+  
+    - namePath: idx
+      valuePath: "@idx"
+
+    - namePath: textDirection
+      valuePath: "@textDirection"
