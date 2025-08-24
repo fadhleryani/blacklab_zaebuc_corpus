@@ -5,18 +5,19 @@ from copy import deepcopy
 import re
 import re
 
-from nltk.stem.wordnet import WordNetLemmatizer
+# from nltk.stem.wordnet import WordNetLemmatizer
 
-Lem = WordNetLemmatizer()
+# Lem = WordNetLemmatizer()
 
 
-def remove_plurals(glosses):
-    no_plurals = set()
-    for g in re.split(r';|,', glosses):
-        g = g.strip()
-        lemma = Lem.lemmatize(g)
-        no_plurals.add(lemma)
-    return ';'.join(no_plurals)
+
+# def remove_plurals(glosses):
+#     no_plurals = set()
+#     for g in re.split(r';|,', glosses):
+#         g = g.strip()
+#         lemma = Lem.lemmatize(g)
+#         no_plurals.add(lemma)
+#     return ';'.join(no_plurals)
 
 
 
@@ -113,7 +114,8 @@ def create_tei(dataframe,title):
                         if pd.notna(row[attr]):
                             if attr=='Gloss':
                                 full_gloss_element = etree.SubElement(tok_element, "gloss_full")
-                                glosses = remove_plurals(row[attr])
+                                # glosses = remove_plurals(row[attr])
+                                glosses = row[attr]
                                 # glosses = row[attr]
                                 full_gloss_element.set('class', glosses)                                
                                 glosses = re.split(r',|;', row[attr])
@@ -140,26 +142,30 @@ def index_tei(tei):
         
     return tei
 
+def load_data(datadir):
+    en = pd.read_csv(f'{datadir}corrected.analyzed_en.tsv',sep='\t',index_col=[0,2,1])
+    ar = pd.read_csv(f'{datadir}corrected.analyzed_ar.tsv',sep='\t',index_col=[0,2,1])
+    data = pd.concat([en,ar])
+    data.columns = [x.lower() for x in data.columns]
+    documents = pd.read_csv(f'{datadir}documents.tsv',sep='\t',index_col=[0])
+    documents.columns = [x.lower() for x in documents.columns]
+    return data,documents
 
 if __name__ == "__main__":
     # load corpus as dataframes
-    EN_analyzed = pd.read_csv('../../zaebuc_written/ZAEBUC-v1.1/EN-all.extracted.corrected.analyzed.corrected-FINAL.tsv',sep='\t')
-    AR_analyzed = pd.read_csv('../../zaebuc_written/ZAEBUC-v1.1/AR-all.extracted.corrected.analyzed.corrected-FINAL.tsv',sep='\t')
-    ENxmls = EN_analyzed.query('Line_Index.isna()')['Document'].replace('</doc>', pd.NA).dropna()
-    ARxmls = AR_analyzed.query('Line_Index.isna()')['Document'].replace('</doc>', pd.NA).dropna()
-    ARxmldf = ARxmls.apply(lambda x: pd.Series(etree.fromstring(x).attrib))
-    ENxmldf = ENxmls.apply(lambda x: pd.Series(etree.fromstring(x).attrib))
-    EN_analyzed = EN_analyzed.dropna(subset=['Line_Index'])
-    AR_analyzed = AR_analyzed.dropna(subset=['Line_Index'])
+    # EN_analyzed = pd.read_csv('../../zaebuc_written/ZAEBUC-v1.1/EN-all.extracted.corrected.analyzed.corrected-FINAL.tsv',sep='\t')
+    # AR_analyzed = pd.read_csv('../../zaebuc_written/ZAEBUC-v1.1/AR-all.extracted.corrected.analyzed.corrected-FINAL.tsv',sep='\t')
+    # ENxmls = EN_analyzed.query('Line_Index.isna()')['Document'].replace('</doc>', pd.NA).dropna()
+    # ARxmls = AR_analyzed.query('Line_Index.isna()')['Document'].replace('</doc>', pd.NA).dropna()
+    # ARxmldf = ARxmls.apply(lambda x: pd.Series(etree.fromstring(x).attrib))
+    # ENxmldf = ENxmls.apply(lambda x: pd.Series(etree.fromstring(x).attrib))
+    # EN_analyzed = EN_analyzed.dropna(subset=['Line_Index'])
+    # AR_analyzed = AR_analyzed.dropna(subset=['Line_Index'])
 
-
-    # concatenate arabic and english corpus
-    samplelen = 1000
-    merged_analyzed = pd.concat([AR_analyzed[:samplelen], EN_analyzed[:samplelen]])
-    # merged_analyzed = pd.concat([AR_analyzed[:],EN_analyzed[:]])
+    data = load_data("../../zaebuc_written/ZAEBUC-v2.0_release")
     
 
     # write xml    
-    tei = create_tei(merged_analyzed[:], "ZAEBUC Written Corpus")
+    tei = create_tei(merged_analyzed[:1], "ZAEBUC Written Corpus")
     tei = index_tei(tei)
     tei.write("../data/zaebuc_written.xml", pretty_print=True, xml_declaration=True, encoding="utf-8")

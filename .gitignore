@@ -1,1 +1,9 @@
 .DS_Store
+.vscode
+__pycache__
+data/archive
+data/blacklab-corpora
+src/BlackLab/*/target
+src/*/target
+src/official_release
+src/*/docker_droplet/data/*

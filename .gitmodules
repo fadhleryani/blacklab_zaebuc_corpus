@@ -1,0 +1,6 @@
+[submodule "src/blacklab-frontend"]
+	path = src/blacklab-frontend
+	url = https://github.com/instituutnederlandsetaal/blacklab-frontend.git
+[submodule "src/BlackLab"]
+	path = src/BlackLab
+	url = https://github.com/instituutnederlandsetaal/BlackLab.git

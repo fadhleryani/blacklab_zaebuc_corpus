@@ -14,7 +14,7 @@ corpusConfig:
   # (used by BLS to either allow or disallow fetching full document content)
   # (defaults to false because this is not allowed for some datasets)
   contentViewable: true
-  textDirection: 'rtl'
+  textDirection: 'ltr'
   
   specialFields:
     pidField: idx
@@ -59,7 +59,7 @@ annotatedFields:
     - name: gloss
       displayName: Gloss
       valuePath: gloss/@class
-      multipleValues: true
+      # multipleValues: true
       sensitivity: sensitive_insensitive
     - name: word
       displayName: Word
@@ -100,3 +100,73 @@ metadata:
 
     - namePath: textDirection
       valuePath: "@textDirection"
+
+    - namePath: language
+      valuePath: "@language"
+    - namePath: writer_id
+      valuePath: "@writer_id"
+    - namePath: year
+      valuePath: "@year"
+    - namePath: course
+      valuePath: "@course"
+    - namePath: word_count
+      valuePath: "@word_count"
+    - namePath: cefr_avg
+      valuePath: "@cefr_avg"
+    - namePath: major
+      valuePath: "@major"
+    - namePath: school_type
+      valuePath: "@school_type"
+    - namePath: school_language
+      valuePath: "@school_language"
+    - namePath: gender
+      valuePath: "@gender"
+    - namePath: topic
+      valuePath: "@topic"
+    - namePath: college
+      valuePath: "@college"
+    - namePath: residence
+      valuePath: "@residence"
+    - namePath: writing_mins
+      valuePath: "@writing_mins"
+    - namePath: handwritten
+      valuePath: "@handwritten"
+    - namePath: earlier_task_language
+      valuePath: "@earlier_task_language"
+    - namePath: days_between_tasks
+      valuePath: "@days_between_tasks"
+    - namePath: safe_assign_score
+      valuePath: "@safe_assign_score"
+    - namePath: cefr_1
+      valuePath: "@cefr_1"
+    - namePath: cefr_2
+      valuePath: "@cefr_2"
+    - namePath: cefr_3
+      valuePath: "@cefr_3"
+    - namePath: split
+      valuePath: "@split"
+
+
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
