@@ -10,6 +10,13 @@ This detection is done based on the *exact* name of the Input Format BlackLab re
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output encoding="utf-8" method="html" omit-xml-declaration="yes" />
 
+<xsl:template match="//*[local-name()='doc'][@textDirection='rtl']">
+    <div dir="rtl">
+        <xsl:apply-templates />
+    </div>
+</xsl:template>
+
+
 <xsl:template match="text()">
     <xsl:value-of select="replace(., '[&#x007F;-&#x009F;]', ' ')"/>
 </xsl:template>

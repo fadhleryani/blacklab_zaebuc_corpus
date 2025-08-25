@@ -24,6 +24,14 @@ setup_official: delete_webapps
 	
 	
 
+update_config_dev_soft: 
+	@echo "Updating config without restarting..."
+	@sudo rm -fr ~/.blacklab
+	@sudo rm -fr /etc/blacklab
+	@sudo cp -pr data/index-configs/ ~/.blacklab/
+# 	@sudo cp -pr data/index-configs/ /etc/blacklab/
+	
+
 update_config_dev: setup_dev
 	@echo "Updating config..."
 	@sudo rm -fr ~/.blacklab
