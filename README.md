@@ -38,7 +38,6 @@ make prep_tomcat_docker
 
 ```
 make rsync
-cd /app
-docker compose up --build -d
+make run_droplet
 ```
 #### url:- localhost:8080/blacklab-frontend/zaebuc-written/search
