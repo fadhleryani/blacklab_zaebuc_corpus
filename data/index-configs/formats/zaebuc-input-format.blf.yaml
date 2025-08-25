@@ -55,6 +55,21 @@ annotatedFields:
     # NOTE: forEachPath is NOT allowed for annotations, because we need to know all annotations before indexing,
     #       and with forEachPath you could run in to an unknown new annotation mid-way through.
     annotations:
+    # columns from data sheet:
+      # 'word',
+      # 'flag',
+      # 'auto_tokenization',
+      # 'auto_pos',
+      # 'auto_lemma',
+      # 'manual_tokenization',
+      # 'manual_pos',
+      # 'manual_lemma',
+      # 'comment',
+      # 'manual_diacritized_lemma',
+      # 'gloss',
+      # 'core_pgn',
+      # 'pron_pgn',
+      # 'gloss_search'
     # First annotation is the main annotation
     - name: gloss_search
       displayName: Gloss/Lemma
@@ -69,6 +84,10 @@ annotatedFields:
       displayName: Lemma
       valuePath: manual_lemma/@class
       sensitivity: sensitive_insensitive
+    - name: diacritized_lemma
+      displayName: Lemma (Diacritized)
+      valuePath: manual_diacritized_lemma/@class
+      sensitivity: sensitive_insensitive
     - name: tokenized
       displayName: Tokenized
       valuePath: manual_tokenization/@class
@@ -81,6 +100,20 @@ annotatedFields:
       displayName: Gloss
       valuePath: gloss/@class
       sensitivity: sensitive_insensitive
+    - name: core_pgn
+      displayName: core_pgn
+      valuePath: core_pgn/@class
+      sensitivity: sensitive_insensitive
+    - name: pron_pgn
+      displayName: pron_pgn
+      valuePath: pron_pgn/@class
+      sensitivity: sensitive_insensitive
+
+
+
+
+
+
 
     # XML tags within the content we'd like to index
     # (relative to container)
