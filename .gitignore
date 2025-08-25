@@ -7,3 +7,4 @@ data/*
 !data/*sample.xml
 src/official_release
 src/docker_droplet*/data/*
+*.war
