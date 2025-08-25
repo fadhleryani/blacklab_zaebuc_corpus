@@ -1,3 +1,6 @@
+include .env
+
+
 compile_backend:
 	@echo "Compiling backend..."
 	@cd src/BlackLab && mvn clean install
@@ -92,12 +95,12 @@ rsync_droplet:
 	@rsync -avz -e ssh \
 	--exclude='.DS_Store' \
 	src/docker_droplet_tomcat/ \
-	<usr>@<ip>:/app/
+	$(USERatIP):/app/
 # rsync_droplet:
 # 	@rsync -avz -e ssh \
 # 	--exclude='.DS_Store' \
 # 	src/docker_droplet/ \
-# 	<usr>@<ip>:/app/
+# 	$(USERatIP):/app/
 
 .DEFAULT_GOAL := default
 
@@ -107,4 +110,4 @@ sample: compile_backend compile_frontend reindex_sample update_config_dev prep_t
 
 
 run_droplet:
-	@ssh <usr>@<ip> -t 'cd /app && docker compose up --build -d'
+	@ssh $(USERatIP) -t 'cd /app && docker compose up --build -d'
