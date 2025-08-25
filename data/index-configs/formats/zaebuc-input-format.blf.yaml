@@ -84,8 +84,8 @@ annotatedFields:
       displayName: Lemma
       valuePath: manual_lemma/@class
       sensitivity: sensitive_insensitive
-    - name: diacritized_lemma
-      displayName: Lemma (Diacritized)
+    - name: manual_diacritized_lemma
+      displayName: Lemma_Diac
       valuePath: manual_diacritized_lemma/@class
       sensitivity: sensitive_insensitive
     - name: tokenized

@@ -9,17 +9,19 @@ vuexModules.ui.actions.results.shared.concordanceAnnotationId('word')
 var x = true;
 var ui = vuexModules.ui.actions;
 ui.helpers.configureAnnotations([
-	[              ,    'EXTENDED'    ,    'ADVANCED'    ,    'EXPLORE'    ,    'SORT'    ,    'GROUP'    ,    'RESULTS'    ,    'CONCORDANCE'    ],
+	[                          ,    'EXTENDED'    ,    'ADVANCED'    ,    'EXPLORE'    ,    'SORT'    ,    'GROUP'    ,    'RESULTS'    ,    'CONCORDANCE'    ],
 	
 	// Other
-	['gloss_search',        x         ,        x         ,                 ,      x       ,       x       ,                 ,                     ],
-	['word'        ,        x         ,        x         ,        x        ,      x       ,       x       ,                 ,                     ],
-	['lemma'       ,        x         ,        x         ,        x        ,      x       ,       x       ,        x        ,                     ],
-	['tokenized'   ,        x         ,        x         ,        x        ,      x       ,       x       ,        x        ,                     ],
-	['pos'         ,        x         ,        x         ,        x        ,      x       ,       x       ,        x        ,                     ],
-	['gloss'       ,                  ,                  ,        x        ,              ,       x       ,        x        ,                     ],
-]);
-
+	['gloss_search'            ,                  ,        x         ,                 ,      x       ,       x       ,                 ,                     ],
+	['word'                    ,        x         ,        x         ,        x        ,      x       ,       x       ,                 ,         x           ],
+	['lemma'                   ,        x         ,        x         ,        x        ,      x       ,       x       ,        x        ,         x           ],
+	['manual_diacritized_lemma',                  ,                  ,                 ,              ,               ,                 ,         x           ],
+	['tokenized'               ,        x         ,        x         ,        x        ,      x       ,       x       ,        x        ,         x           ],
+	['pos'                     ,        x         ,        x         ,        x        ,      x       ,       x       ,        x        ,         x           ],
+	['gloss'                   ,                  ,                  ,        x        ,              ,       x       ,        x        ,         x           ],
+	['core_pgn'                ,                  ,                  ,                 ,              ,               ,                 ,         x           ],
+	['pron_pgn'                ,                  ,                  ,                 ,              ,               ,                 ,         x           ],
+]);x
 ui.helpers.configureMetadata([
 	[                       ,    'FILTER'    ,    'SORT'    ,    'GROUP'    ,    'RESULTS/HITS'    ,    'RESULTS/DOCS'    ,    'EXPORT'    ],
 	
@@ -27,7 +29,7 @@ ui.helpers.configureMetadata([
 	['cefr_1'               ,       x        ,      x       ,       x       ,                      ,                      ,                ],
 	['cefr_2'               ,       x        ,      x       ,       x       ,                      ,                      ,                ],
 	['cefr_3'               ,       x        ,      x       ,       x       ,                      ,                      ,                ],
-	['cefr_avg'             ,       x        ,      x       ,       x       ,                      ,                      ,                ],
+	['cefr_avg'             ,       x        ,      x       ,       x       ,         x            ,                      ,                ],
 	['college'              ,       x        ,      x       ,       x       ,                      ,                      ,                ],
 	['course'               ,       x        ,      x       ,       x       ,                      ,                      ,                ],
 	['days_between_tasks'   ,       x        ,      x       ,       x       ,                      ,                      ,                ],
