@@ -1,9 +1,9 @@
 .DS_Store
 .vscode
 __pycache__
-data/archive
-data/blacklab-corpora
-src/BlackLab/*/target
-src/*/target
+data/*
+!data/index/*
+!data/index-configs
+!data/*sample.xml
 src/official_release
-src/*/docker_droplet/data/*
+src/docker_droplet*/data/*
