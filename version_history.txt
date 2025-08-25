@@ -1,0 +1,9 @@
+0.8:
+- server and frontend are operational
+
+0.9
+- search expansion using gloss
+- updated hits columns display (in projectconfigs search js file)
+    - added avg cefr to columns
+- enabled rtl in doc view (in projectconfigs article file)
+
