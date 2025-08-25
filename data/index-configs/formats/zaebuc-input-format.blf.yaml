@@ -57,7 +57,7 @@ annotatedFields:
     annotations:
     # First annotation is the main annotation
     - name: gloss_search
-      # displayName: Gloss/Lemma
+      displayName: Gloss/Lemma
       valuePath: gloss_search/@class
       # multipleValues: true
       sensitivity: sensitive_insensitive
