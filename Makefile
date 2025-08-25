@@ -92,12 +92,12 @@ rsync_droplet:
 	@rsync -avz -e ssh \
 	--exclude='.DS_Store' \
 	src/docker_droplet_tomcat/ \
-	USERatIP:/app/
+	<usr>@<ip>:/app/
 # rsync_droplet:
 # 	@rsync -avz -e ssh \
 # 	--exclude='.DS_Store' \
 # 	src/docker_droplet/ \
-# 	USERatIP:/app/
+# 	<usr>@<ip>:/app/
 
 .DEFAULT_GOAL := default
 
@@ -107,4 +107,4 @@ sample: compile_backend compile_frontend reindex_sample update_config_dev prep_t
 
 
 run_droplet:
-	@ssh USERatIP -t 'cd /app && docker compose up --build -d'
+	@ssh <usr>@<ip> -t 'cd /app && docker compose up --build -d'
