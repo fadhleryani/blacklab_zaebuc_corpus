@@ -56,9 +56,9 @@ annotatedFields:
     #       and with forEachPath you could run in to an unknown new annotation mid-way through.
     annotations:
     # First annotation is the main annotation
-    - name: gloss
-      displayName: Gloss
-      valuePath: gloss/@class
+    - name: gloss_search
+      # displayName: Gloss/Lemma
+      valuePath: gloss_search/@class
       # multipleValues: true
       sensitivity: sensitive_insensitive
     - name: word
@@ -77,9 +77,9 @@ annotatedFields:
       displayName: PoS
       valuePath: manual_pos/@class
       sensitivity: sensitive_insensitive
-    - name: gloss_full
-      displayName: GlossFull
-      valuePath: gloss_full/@class
+    - name: gloss
+      displayName: Gloss
+      valuePath: gloss/@class
       sensitivity: sensitive_insensitive
 
     # XML tags within the content we'd like to index
