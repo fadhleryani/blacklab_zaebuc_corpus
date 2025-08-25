@@ -2,9 +2,8 @@
 .vscode
 __pycache__
 data/*
-!data/index/*
-!data/index-configs
-!data/*sample.xml
+!.gitkeep
 src/official_release
 src/docker_droplet*/data/*
 *.war
+!.gitkeep
