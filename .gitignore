@@ -7,3 +7,4 @@ src/official_release
 src/docker_droplet*/data/*
 *.war
 !.gitkeep
+.env
