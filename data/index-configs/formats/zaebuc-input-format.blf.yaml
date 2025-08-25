@@ -56,9 +56,9 @@ annotatedFields:
     #       and with forEachPath you could run in to an unknown new annotation mid-way through.
     annotations:
     # First annotation is the main annotation
-    - name: gloss
+    - name: gloss_search
       displayName: Gloss
-      valuePath: gloss/@class
+      valuePath: gloss_search/@class
       # multipleValues: true
       sensitivity: sensitive_insensitive
     - name: word

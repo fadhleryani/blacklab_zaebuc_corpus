@@ -36,13 +36,13 @@ reindex:
 	@echo "reindexing corpus..."
 	@rm -fr data/index/zaebuc-written
 	@java -cp src/BlackLab/core/target/blacklab-*.jar nl.inl.blacklab.tools.IndexTool create data/index/zaebuc-written data/zaebuc_written.xml zaebuc-input-format
-	@brew services restart tomcat@9
+# 	@brew services restart tomcat@9
 
 reindex_sample:
 	@echo "reindexing corpus..."
 	@rm -fr data/index/zaebuc-written
 	@java -cp src/BlackLab/core/target/blacklab-*.jar nl.inl.blacklab.tools.IndexTool create data/index/zaebuc-written data/zaebuc_written_sample.xml zaebuc-input-format
-	@brew services restart tomcat@9
+# 	@brew services restart tomcat@9
 
 update_config_official: setup_official
 	@echo "Updating config..."
@@ -51,7 +51,7 @@ update_config_official: setup_official
 	@sudo cp -pr data/index-configs/ /etc/blacklab/
 	# @sudo cp -pr data/index-configs/ ~/.blacklab/
 	@rm -fr data/index/zaebuc-written
-	@java -cp src/official_release/blacklab-3.0.1.jar:lib nl.inl.blacklab.tools.IndexTool create data/index/zaebuc-written data/zaebuc_written.xml zaebuc-input-format
+# 	@java -cp src/official_release/blacklab-3.0.1.jar:lib nl.inl.blacklab.tools.IndexTool create data/index/zaebuc-written data/zaebuc_written.xml zaebuc-input-format
 	@brew services restart tomcat@9
 
 prep_docker:
