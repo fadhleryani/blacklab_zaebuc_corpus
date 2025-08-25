@@ -8,6 +8,16 @@
 `git submodule update --init --recursive`
 
 
+## to run on the local tomcat, make sure to set paths on the following two files:
+
+- data/index-configs/blacklab-frontend.properties:
+
+ corporaInterfaceDataDir=[absolute path to data/index-configs/projectconfigs directory]
+
+- data/index-configs/blacklab-server.yaml: 
+
+set absolute path to data/index/zaebuc-written
+
 
 ### note on tomcat jdk
 if things don't work might have to make sure tomcat is using jdk11, by checking tomcat@9/bin/catalina, 

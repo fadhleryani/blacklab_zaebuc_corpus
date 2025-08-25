@@ -1,0 +1,9 @@
+---
+configVersion: 2
+
+# Where indexes can be found
+# (list directories whose subdirectories are indexes, or directories containing a single index)
+indexLocations:
+# - /Users/f/Library/CloudStorage/SynologyDrive-ba3sasah/camelLab/zaebuc/corpus_app/data/blacklab-corpora
+- /data/index/zaebuc-written
+
