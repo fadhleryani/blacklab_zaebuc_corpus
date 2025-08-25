@@ -104,3 +104,7 @@ rsync_droplet:
 # default: compile_backend compile_frontend reindex update_config_dev prep_docker
 default: compile_backend compile_frontend reindex update_config_dev prep_tomcat_docker
 sample: compile_backend compile_frontend reindex_sample update_config_dev prep_tomcat_docker
+
+
+run_droplet:
+	@ssh USERatIP -t 'cd /app && docker compose up --build -d'
