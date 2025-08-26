@@ -11,8 +11,7 @@ drop: compile set_config_paths reindex prep_tomcat_docker
 sample_drop: compile set_config_paths reindex_sample prep_tomcat_docker 
 
 run_drop:
-	@cd src/docker_droplet_tomcat
-	@docker compose up --build -d
+	@cd src/docker_droplet_tomcat && docker compose up --build -d
 
 
 run_drop_remote: rsync
