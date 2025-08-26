@@ -31,23 +31,12 @@ or explicityly /opt/homebrew/Cellar/openjdk@11/11.0.23/libexec/openjdk.jdk/Conte
 
 
 ## compile and run:
-`make sample` or just `make` for full dataset`
 
-or separately:
+- local tomcat:
+    - `make sample` or just `make` for full dataset`
 
-```
-make compile_backend
-make compile_frontend
-make index_sample # or index for full dataset
-make update_config_dev
-make prep_tomcat_docker
-```
+- on docker:
+    - `make sample_drop` or just `make drop` for building docker containers, and `make run_drop`
 
 
-# setup and run container
-
-```
-make rsync
-make run_droplet
-```
 #### url:- localhost:8080/blacklab-frontend/zaebuc-written/search

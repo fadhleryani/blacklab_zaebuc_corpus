@@ -6,9 +6,17 @@ default: compile set_config_paths reindex update_config_dev
 
 sample: compile set_config_paths reindex_sample update_config_dev
 
-drop: compile set_config_paths reindex prep_tomcat_docker rsync run_droplet
+drop: compile set_config_paths reindex prep_tomcat_docker 
 
-sample_drop: compile set_config_paths reindex_sample prep_tomcat_docker rsync run_droplet
+sample_drop: compile set_config_paths reindex_sample prep_tomcat_docker 
+
+run_drop:
+	@cd src/docker_droplet_tomcat
+	@docker compose up --build -d
+
+
+run_drop_remote: rsync
+	@ssh $(USERatIP) -t 'cd /app && docker compose up --build -d'
 
 
 
@@ -87,27 +95,27 @@ prep_docker:
 	@echo "Updating docker droplet setup files..."
 	@rm -fr src/docker_droplet/data/index-configs/projectconfigs
 	@rm -fr src/docker_droplet/data/index-configs/formats	
-	@sudo cp -pr data/index-configs/projectconfigs src/docker_droplet/data/index-configs/
-	@sudo cp -pr data/index-configs/formats src/docker_droplet/data/index-configs/
+	@cp -pr data/index-configs/projectconfigs src/docker_droplet/data/index-configs/
+	@cp -pr data/index-configs/formats src/docker_droplet/data/index-configs/
 
 	@rm -fr src/docker_droplet/data/index/zaebuc-written
-	@sudo cp -pr data/index/zaebuc-written src/docker_droplet/data/index/zaebuc-written
+	@cp -pr data/index/zaebuc-written src/docker_droplet/data/index/zaebuc-written
 
-	@sudo cp src/BlackLab/server/target/blacklab-server*.war src/docker_droplet/blacklab-server.war
-	@sudo cp src/blacklab-frontend/target/*-frontend*.war src/docker_droplet/blacklab-frontend.war
+	@cp src/BlackLab/server/target/blacklab-server*.war src/docker_droplet/blacklab-server.war
+	@cp src/blacklab-frontend/target/*-frontend*.war src/docker_droplet/blacklab-frontend.war
 
 prep_tomcat_docker:
 	@echo "Updating docker droplet setup files..."
 	@rm -fr src/docker_droplet_tomcat/data/index-configs/projectconfigs
 	@rm -fr src/docker_droplet_tomcat/data/index-configs/formats	
-	@sudo cp -pr data/index-configs/projectconfigs src/docker_droplet_tomcat/data/index-configs/
-	@sudo cp -pr data/index-configs/formats src/docker_droplet_tomcat/data/index-configs/
+	@cp -pr data/index-configs/projectconfigs src/docker_droplet_tomcat/data/index-configs/
+	@cp -pr data/index-configs/formats src/docker_droplet_tomcat/data/index-configs/
 
 	@rm -fr src/docker_droplet_tomcat/data/index/zaebuc-written
-	@sudo cp -pr data/index/zaebuc-written src/docker_droplet_tomcat/data/index/zaebuc-written
+	@cp -pr data/index/zaebuc-written src/docker_droplet_tomcat/data/index/zaebuc-written
 
-	@sudo cp src/BlackLab/server/target/blacklab-server*.war src/docker_droplet_tomcat/blacklab-server.war
-	@sudo cp src/blacklab-frontend/target/*-frontend*.war src/docker_droplet_tomcat/blacklab-frontend.war
+	@cp src/BlackLab/server/target/blacklab-server*.war src/docker_droplet_tomcat/blacklab-server.war
+	@cp src/blacklab-frontend/target/*-frontend*.war src/docker_droplet_tomcat/blacklab-frontend.war
 
 rsync_droplet:
 	@rsync -avz -e ssh \
@@ -123,5 +131,3 @@ rsync_droplet:
 
 
 
-run_droplet:
-	@ssh $(USERatIP) -t 'cd /app && docker compose up --build -d'
