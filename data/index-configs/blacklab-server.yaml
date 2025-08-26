@@ -5,5 +5,3 @@ configVersion: 2
 # (list directories whose subdirectories are indexes, or directories containing a single index)
 indexLocations:
 - /Users/f/Library/CloudStorage/SynologyDrive-ba3sasah/camelLab/zaebuc/corpus_app/data/index/zaebuc-written
-- /Users/f/Library/CloudStorage/SynologyDrive-ba3sasah/camelLab/zaebuc/corpus_app/data/index/zaebuc-written
-

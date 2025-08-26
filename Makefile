@@ -34,8 +34,8 @@ configure-frontend-properties:
 	@echo "Updated blacklab-frontend.properties with corporaInterfaceDataDir=$(PROJECT_CONFIGS_DIR)"
 
 configure-server-yaml:
-	@sed -i.bak  "s|indexLocations:.*|indexLocations\:\n- $(ZAEBUC_INDEX_DIR)|" \
-        "$(ROOT_DIR)data/index-configs/blacklab-server.yaml"
+	@perl -i.bak -0777 -pe "s|indexLocations:\n- .*|indexLocations:\n- $(ZAEBUC_INDEX_DIR)|" \
+		 "$(ROOT_DIR)data/index-configs/blacklab-server.yaml"
 	@echo "Updated blacklab-server.yaml with indexLocations: $(ZAEBUC_INDEX_DIR)"
 
 
