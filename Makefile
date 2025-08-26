@@ -2,13 +2,14 @@
 .DEFAULT_GOAL := default
 include *.env
 
-default: compile set_config_paths reindex update_config_dev prep_tomcat_docker
+default: compile set_config_paths reindex update_config_dev
 
-sample: compile set_config_paths reindex_sample update_config_dev prep_tomcat_docker
+sample: compile set_config_paths reindex_sample update_config_dev
+
+drop: compile set_config_paths reindex prep_tomcat_docker rsync run_droplet
 
 sample_drop: compile set_config_paths reindex_sample prep_tomcat_docker rsync run_droplet
 
-drop: compile set_config_paths reindex prep_tomcat_docker rsync run_droplet
 
 
 
@@ -20,14 +21,14 @@ ZAEBUC_INDEX_DIR := $(ROOT_DIR)data/index/zaebuc-written
 set_config_paths: configure-frontend-properties configure-server-yaml
 
 configure-frontend-properties:
-    @sed -i '' "s|corporaInterfaceDataDir=.*|corporaInterfaceDataDir=$(PROJECT_CONFIGS_DIR)|" \
+	@sed -i.bak  "s|corporaInterfaceDataDir=.*|corporaInterfaceDataDir=$(PROJECT_CONFIGS_DIR)|" \
         "$(ROOT_DIR)data/index-configs/blacklab-frontend.properties"
-    @echo "Updated blacklab-frontend.properties with corporaInterfaceDataDir=$(PROJECT_CONFIGS_DIR)"
+	@echo "Updated blacklab-frontend.properties with corporaInterfaceDataDir=$(PROJECT_CONFIGS_DIR)"
 
 configure-server-yaml:
-    @sed -i '' "s|indexLocations:.*|indexLocations\:\n- $(ZAEBUC_INDEX_DIR)|" \
+	@sed -i.bak  "s|indexLocations:.*|indexLocations\:\n- $(ZAEBUC_INDEX_DIR)|" \
         "$(ROOT_DIR)data/index-configs/blacklab-server.yaml"
-    @echo "Updated blacklab-server.yaml with indexLocations: $(ZAEBUC_INDEX_DIR)"
+	@echo "Updated blacklab-server.yaml with indexLocations: $(ZAEBUC_INDEX_DIR)"
 
 
 compile: compile_backend compile_frontend
