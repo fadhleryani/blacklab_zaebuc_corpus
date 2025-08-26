@@ -1,6 +1,36 @@
+.PHONY: set_config_paths configure-frontend-properties configure-server-yaml drop default sample 
+.DEFAULT_GOAL := default
 include *.env
 
+default: compile set_config_paths reindex update_config_dev prep_tomcat_docker
 
+sample: compile set_config_paths reindex_sample update_config_dev prep_tomcat_docker
+
+sample_drop: compile set_config_paths reindex_sample prep_tomcat_docker rsync run_droplet
+
+drop: compile set_config_paths reindex prep_tomcat_docker rsync run_droplet
+
+
+
+ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
+PROJECT_CONFIGS_DIR := $(ROOT_DIR)data/index-configs/projectconfigs
+ZAEBUC_INDEX_DIR := $(ROOT_DIR)data/index/zaebuc-written
+	
+
+set_config_paths: configure-frontend-properties configure-server-yaml
+
+configure-frontend-properties:
+    @sed -i '' "s|corporaInterfaceDataDir=.*|corporaInterfaceDataDir=$(PROJECT_CONFIGS_DIR)|" \
+        "$(ROOT_DIR)data/index-configs/blacklab-frontend.properties"
+    @echo "Updated blacklab-frontend.properties with corporaInterfaceDataDir=$(PROJECT_CONFIGS_DIR)"
+
+configure-server-yaml:
+    @sed -i '' "s|indexLocations:.*|indexLocations\:\n- $(ZAEBUC_INDEX_DIR)|" \
+        "$(ROOT_DIR)data/index-configs/blacklab-server.yaml"
+    @echo "Updated blacklab-server.yaml with indexLocations: $(ZAEBUC_INDEX_DIR)"
+
+
+compile: compile_backend compile_frontend
 compile_backend:
 	@echo "Compiling backend..."
 	@cd src/BlackLab && mvn clean install
@@ -20,12 +50,7 @@ setup_dev: delete_webapps
 
 	@sudo cp src/blacklab-frontend/target/*-frontend*.war /opt/homebrew/opt/tomcat@9/libexec/webapps/blacklab-frontend.war
 
-setup_official: delete_webapps
-	@echo "Setting up official release..."
-	@sudo cp src/official_release/blacklab-server*.war /opt/homebrew/opt/tomcat@9/libexec/webapps/blacklab-server.war
-	@sudo cp src/official_release/corpus-frontend*.war /opt/homebrew/opt/tomcat@9/libexec/webapps/corpus-frontend.war
-	
-	
+
 
 update_config_dev_soft: 
 	@echo "Updating config without restarting..."
@@ -43,6 +68,7 @@ update_config_dev: setup_dev
 # 	@sudo cp -pr data/index-configs/ /etc/blacklab/
 	@brew services restart tomcat@9
 
+
 reindex:
 	@echo "reindexing corpus..."
 	@rm -fr data/index/zaebuc-written
@@ -55,15 +81,6 @@ reindex_sample:
 	@java -cp src/BlackLab/core/target/blacklab-*.jar nl.inl.blacklab.tools.IndexTool create data/index/zaebuc-written data/zaebuc_written_sample.xml zaebuc-input-format
 	@brew services restart tomcat@9
 
-update_config_official: setup_official
-	@echo "Updating config..."
-	@sudo rm -fr /etc/blacklab
-	@sudo rm -fr ~/.blacklab
-	@sudo cp -pr data/index-configs/ /etc/blacklab/
-	# @sudo cp -pr data/index-configs/ ~/.blacklab/
-	@rm -fr data/index/zaebuc-written
-	@java -cp src/official_release/blacklab-3.0.1.jar:lib nl.inl.blacklab.tools.IndexTool create data/index/zaebuc-written data/zaebuc_written.xml zaebuc-input-format
-	@brew services restart tomcat@9
 
 prep_docker:
 	@echo "Updating docker droplet setup files..."
@@ -102,11 +119,7 @@ rsync_droplet:
 # 	src/docker_droplet/ \
 # 	$(USERatIP):/app/
 
-.DEFAULT_GOAL := default
 
-# default: compile_backend compile_frontend reindex update_config_dev prep_docker
-default: compile_backend compile_frontend reindex update_config_dev prep_tomcat_docker
-sample: compile_backend compile_frontend reindex_sample update_config_dev prep_tomcat_docker
 
 
 run_droplet:
