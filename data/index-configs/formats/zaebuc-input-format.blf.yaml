@@ -15,7 +15,7 @@ corpusConfig:
   textDirection: 'rtl'
   
   specialFields:
-    pidField: idx
+    pidField: docId
 
 # (Optional, informational)
 # content, metadata or mixed?
@@ -118,101 +118,16 @@ annotatedFields:
 
 
 metadata:
-  containerPath: .
+  containerPath: metadata
   fields:
   
-    - name: idx
-      namePath: idx
-      valuePath: "@idx"
+    # <metadata/> tag has an id attribute we want to index as docId
+    - name: docId
+      valuePath: "@id"
+      type: untokenized  # persistent identifier should be untokenized!
 
-    - name: textDirection
-      namePath: textDirection
-      valuePath: "@textDirection"
+      # Each <meta/> tag corresponds with a metadata field
+    - forEachPath: meta
+      namePath: "@name"   # name attribute contains field name
+      valuePath: .        # element text is the field value
 
-    - name: language
-      namePath: language
-      valuePath: "@language"
-
-    - name: writer_id
-      namePath: writer_id
-      valuePath: "@writer_id"
-
-    - name: year
-      namePath: year
-      valuePath: "@year"
-
-    - name: course
-      namePath: course
-      valuePath: "@course"
-
-    - name: word_count
-      namePath: word_count
-      valuePath: "@word_count"
-    
-    - name: cefr_avg
-      namePath: cefr_avg
-      valuePath: "@cefr_avg"
-    
-    - name: major
-      namePath: major
-      valuePath: "@major"
-    
-    - name: school_type
-      namePath: school_type
-      valuePath: "@school_type"
-    
-    - name: school_language
-      namePath: school_language
-      valuePath: "@school_language"
-    
-    - name: gender
-      namePath: gender
-      valuePath: "@gender"
-    
-    - name: topic
-      namePath: topic
-      valuePath: "@topic"
-    
-    - name: college
-      namePath: college
-      valuePath: "@college"
-    
-    - name: residence
-      namePath: residence
-      valuePath: "@residence"
-    
-    - name: writing_mins
-      namePath: writing_mins
-      valuePath: "@writing_mins"
-    
-    - name: handwritten
-      namePath: handwritten
-      valuePath: "@handwritten"
-    
-    - name: earlier_task_language
-      namePath: earlier_task_language
-      valuePath: "@earlier_task_language"
-    
-    - name: days_between_tasks
-      namePath: days_between_tasks
-      valuePath: "@days_between_tasks"
-    
-    - name: safe_assign_score
-      namePath: safe_assign_score
-      valuePath: "@safe_assign_score"
-    
-    - name: cefr_1
-      namePath: cefr_1
-      valuePath: "@cefr_1"
-    
-    - name: cefr_2
-      namePath: cefr_2
-      valuePath: "@cefr_2"
-    
-    - name: cefr_3
-      namePath: cefr_3
-      valuePath: "@cefr_3"
-    
-    - name: split
-      namePath: split
-      valuePath: "@split"

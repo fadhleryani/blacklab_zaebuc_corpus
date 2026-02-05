@@ -1,5 +1,5 @@
  vuexModules.ui.getState().results.shared.getDocumentSummary = function(metadata, specialFields) {
-   return 'Document: ' + JSON.parse(JSON.stringify(metadata['idx'][0]));
+   return 'Document: ' + JSON.parse(JSON.stringify(metadata['docId']));
  }
 
 
@@ -37,7 +37,7 @@ ui.helpers.configureMetadata([
 	['fromInputFile'        ,       x        ,      x       ,       x       ,                      ,                      ,                ],
 	['gender'               ,       x        ,      x       ,       x       ,                      ,                      ,                ],
 	['handwritten'          ,       x        ,      x       ,       x       ,                      ,                      ,                ],
-	['idx'                  ,       x        ,      x       ,       x       ,                      ,                      ,                ],
+	['docId'                ,       x        ,      x       ,       x       ,                      ,                      ,                ],
 	['language'             ,       x        ,      x       ,       x       ,                      ,                      ,                ],
 	['major'                ,       x        ,      x       ,       x       ,                      ,                      ,                ],
 	['residence'            ,       x        ,      x       ,       x       ,                      ,                      ,                ],

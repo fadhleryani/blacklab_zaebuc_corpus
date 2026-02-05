@@ -25,14 +25,25 @@ def write_xml(data, metadata, out_path="../data/zaebuc_written.xml", sample=None
     for doc_id in metadata.index[:]:
         # for doc_id in ['ar-2021-X32635', 'ar-2021-X32635']:
 
-        # doc metadata
-        doc = metadata.loc[doc_id].to_frame().drop(
-            'text').T.reset_index(names='idx')
-        doc['textDirection'] = doc['language'].map(
-            lambda x: 'rtl' if x == 'Arabic' else 'ltr')
-        doc = doc.to_xml(root_name='corpus', row_name='doc', attr_cols=doc.columns.to_list(
-        ), xml_declaration=False, index=False)
-        doc = etree.fromstring(doc)
+        # Create doc element
+        doc = etree.Element('doc')
+        
+        # Create metadata element with id attribute
+        metadata_elem = etree.Element('metadata')
+        metadata_elem.attrib['id'] = str(doc_id)
+        
+        # Add metadata fields as meta subelements
+        doc_metadata = metadata.loc[doc_id].drop('text') if 'text' in metadata.loc[doc_id] else metadata.loc[doc_id]
+        doc_metadata['textDirection'] = 'rtl' if doc_metadata['language'] == 'Arabic' else 'ltr'
+        
+        for field_name, field_value in doc_metadata.items():
+            if pd.notna(field_value):  # Skip NaN values
+                meta_elem = etree.Element('meta')
+                meta_elem.attrib['name'] = str(field_name)
+                meta_elem.text = str(field_value)
+                metadata_elem.append(meta_elem)
+        
+        doc.append(metadata_elem)
 
         linesidxs = data.loc[doc_id].index.get_level_values(
             0).drop_duplicates()
@@ -41,7 +52,7 @@ def write_xml(data, metadata, out_path="../data/zaebuc_written.xml", sample=None
         for lineidx in linesidxs:
             line = etree.Element('sent')
             line.attrib['idx'] = str(int(lineidx))
-            doc[0].append(line)
+            doc.append(line)
 
             words = data.loc[(doc_id, lineidx)][:]
 
@@ -104,7 +115,7 @@ def write_xml(data, metadata, out_path="../data/zaebuc_written.xml", sample=None
 
                 line.append(word)
 
-        corpus.append(doc[0])
+        corpus.append(doc)
 
     etree.indent(corpus, space="    ")
     tree = etree.ElementTree(corpus)
