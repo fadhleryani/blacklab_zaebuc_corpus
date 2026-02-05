@@ -14,6 +14,11 @@
 
 ## run app
 
-`docker compose up -d`
+`docker compose up --build -d`
 
 #### url:- localhost:8080/blacklab-frontend/zaebuc-written/search
+
+
+-----------------------------
+
+### to run dev version of 
