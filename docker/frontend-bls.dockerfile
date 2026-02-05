@@ -10,7 +10,7 @@ FROM maven:3.9-eclipse-temurin-17 AS builder
 
 # Copy source
 WORKDIR /app
-COPY . .
+COPY src/blacklab-frontend/ .
 
 # Build the WAR.
 RUN --mount=type=cache,target=/root/.m2  \
