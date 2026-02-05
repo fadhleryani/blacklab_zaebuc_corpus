@@ -27,7 +27,7 @@ reindex_sample:
 	@mkdir -p data/index/zaebuc-written
 # 	@./index-corpus-265aaa7.sh data/index/zaebuc-written data/zaebuc_written_sample.xml data/index-configs/formats/zaebuc-input-format.blf.yaml
 # # 	java command below requires format to be in home ~/.blacklab directory
-	@@cd data/index-configs/formats/ && java -cp ../../../src/BlackLab/core/target/blacklab-*.jar nl.inl.blacklab.tools.IndexTool create ../../index/zaebuc-written ../../zaebuc_written_sample.xml zaebuc-input-format
+	@cd data/index-configs/formats/ && java -cp ../../../src/BlackLab/core/target/blacklab-*.jar nl.inl.blacklab.tools.IndexTool create ../../index/zaebuc-written ../../zaebuc_written_sample.xml zaebuc-input-format
 	@echo "indexed sample corpus at data/index/zaebuc-written"
 
 reindex_dev:
