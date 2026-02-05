@@ -2,9 +2,7 @@
 displayName: "Custom format for ZAEBUC corpus"
 
 # For describing input format in user interface (optional)
-# description: A TEI P5 variant where part of speech is expected to be in the type attribute. Deprecated, will be removed eventually.
 
-# helpUrl: http://www.tei-c.org/Guidelines/P5/
 corpusConfig:
   # Display name for the corpus
   displayName: ZAEBUC written corpus
@@ -14,7 +12,7 @@ corpusConfig:
   # (used by BLS to either allow or disallow fetching full document content)
   # (defaults to false because this is not allowed for some datasets)
   contentViewable: true
-  textDirection: 'ltr'
+  textDirection: 'rtl'
   
   specialFields:
     pidField: idx
@@ -110,11 +108,6 @@ annotatedFields:
       sensitivity: sensitive_insensitive
 
 
-
-
-
-
-
     # XML tags within the content we'd like to index
     # (relative to container)
     inlineTags:
@@ -128,78 +121,98 @@ metadata:
   containerPath: .
   fields:
   
-    - namePath: idx
+    - name: idx
+      namePath: idx
       valuePath: "@idx"
 
-    - namePath: textDirection
+    - name: textDirection
+      namePath: textDirection
       valuePath: "@textDirection"
 
-    - namePath: language
+    - name: language
+      namePath: language
       valuePath: "@language"
-    - namePath: writer_id
+
+    - name: writer_id
+      namePath: writer_id
       valuePath: "@writer_id"
-    - namePath: year
+
+    - name: year
+      namePath: year
       valuePath: "@year"
-    - namePath: course
+
+    - name: course
+      namePath: course
       valuePath: "@course"
-    - namePath: word_count
+
+    - name: word_count
+      namePath: word_count
       valuePath: "@word_count"
-    - namePath: cefr_avg
+    
+    - name: cefr_avg
+      namePath: cefr_avg
       valuePath: "@cefr_avg"
-    - namePath: major
+    
+    - name: major
+      namePath: major
       valuePath: "@major"
-    - namePath: school_type
+    
+    - name: school_type
+      namePath: school_type
       valuePath: "@school_type"
-    - namePath: school_language
+    
+    - name: school_language
+      namePath: school_language
       valuePath: "@school_language"
-    - namePath: gender
+    
+    - name: gender
+      namePath: gender
       valuePath: "@gender"
-    - namePath: topic
+    
+    - name: topic
+      namePath: topic
       valuePath: "@topic"
-    - namePath: college
+    
+    - name: college
+      namePath: college
       valuePath: "@college"
-    - namePath: residence
+    
+    - name: residence
+      namePath: residence
       valuePath: "@residence"
-    - namePath: writing_mins
+    
+    - name: writing_mins
+      namePath: writing_mins
       valuePath: "@writing_mins"
-    - namePath: handwritten
+    
+    - name: handwritten
+      namePath: handwritten
       valuePath: "@handwritten"
-    - namePath: earlier_task_language
+    
+    - name: earlier_task_language
+      namePath: earlier_task_language
       valuePath: "@earlier_task_language"
-    - namePath: days_between_tasks
+    
+    - name: days_between_tasks
+      namePath: days_between_tasks
       valuePath: "@days_between_tasks"
-    - namePath: safe_assign_score
+    
+    - name: safe_assign_score
+      namePath: safe_assign_score
       valuePath: "@safe_assign_score"
-    - namePath: cefr_1
+    
+    - name: cefr_1
+      namePath: cefr_1
       valuePath: "@cefr_1"
-    - namePath: cefr_2
+    
+    - name: cefr_2
+      namePath: cefr_2
       valuePath: "@cefr_2"
-    - namePath: cefr_3
+    
+    - name: cefr_3
+      namePath: cefr_3
       valuePath: "@cefr_3"
-    - namePath: split
+    
+    - name: split
+      namePath: split
       valuePath: "@split"
-
-
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      

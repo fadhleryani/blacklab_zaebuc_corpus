@@ -1,10 +1,7 @@
 .DS_Store
 .vscode
 __pycache__
-data/*
 !.gitkeep
-src/official_release
-src/docker_droplet*/data/*
-*.war
 !.gitkeep
-.env
+
+data/index/zaebuc-written
