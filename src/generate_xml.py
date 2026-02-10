@@ -98,18 +98,20 @@ def write_xml(data, metadata, out_path="../data/zaebuc_written.xml", sample=None
                         analysis.text = value
 
                     # split gloss into gloss_search elements
-                    elif analysisid == 'gloss_search':
+                    elif analysisid == 'expanded_gloss':
                         for gloss in set(value):
                             gloss = gloss
-                            gloss_element = etree.Element("gloss_search")
+                            gloss_element = etree.Element("expanded_gloss")
                             gloss_element.set('class', gloss)
                             word.append(gloss_element)
                             # continue
 
-                    # set remaining columns
-                    else:
+                    # set remaining columns if they don't start with _
+                    elif not analysisid.startswith('_'):
                         analysis = etree.Element(analysisid)
                         analysis.attrib['class'] = value
+                    else: # ignore columns starting with _
+                        pass
 
                     word.append(analysis)
 
