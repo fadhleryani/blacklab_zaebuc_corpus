@@ -12,7 +12,7 @@ corpusConfig:
   # (used by BLS to either allow or disallow fetching full document content)
   # (defaults to false because this is not allowed for some datasets)
   contentViewable: true
-  textDirection: 'rtl'
+  textDirection: 'ltr'
   
   specialFields:
     pidField: docId
@@ -69,9 +69,9 @@ annotatedFields:
       # 'pron_pgn',
       # 'gloss_search'
     # First annotation is the main annotation
-    - name: gloss_search
-      displayName: Gloss/Lemma
-      valuePath: gloss_search/@class
+    - name: expanded_gloss
+      displayName: Expanded Gloss Search
+      valuePath: expanded_gloss/@class
       # multipleValues: true
       sensitivity: sensitive_insensitive
     - name: word
