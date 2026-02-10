@@ -49,10 +49,10 @@
         <!-- <PropColumns>lemma,pos,tense, person,number</PropColumns> -->
 
         <NavLinks>
-            <Link value="http://www.ivdnt.org/" newWindow="true">INT</Link>
+            <!-- <Link value="http://www.ivdnt.org/" newWindow="true">INT</Link>
             <Link value="http://www.clarin.eu/" newWindow="true">CLARIN</Link>
             <Link value="https://www.clariah.nl/" newWindow="true">CLARIAH</Link>
-            <Link value="${request:corpusPath}/help">Help</Link>
+            <Link value="${request:corpusPath}/help">Help</Link> -->
             <Link value="${request:corpusPath}/about">About</Link>
         </NavLinks>
 
