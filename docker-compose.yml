@@ -5,3 +5,7 @@ services:
     build: .
     ports:
       - "8080:8080"
+
+    volumes:
+    - ./data/index:/data/index
+    - ./data/index-configs:/etc/blacklab
