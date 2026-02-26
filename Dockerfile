@@ -2,8 +2,9 @@ FROM tomcat:9.0.108-jre21-temurin-noble
 
 
 # Copy compiled WAR file(s) to Tomcat, rename them to remove version to match configs
-COPY src/BlackLab/server/target/*.war /usr/local/tomcat/webapps/blacklab-server.war
-COPY src/blacklab-frontend/target/*-frontend*.war /usr/local/tomcat/webapps/blacklab-frontend.war
+COPY src/*.war /usr/local/tomcat/webapps/
+# COPY src/BlackLab/server/target/*.war /usr/local/tomcat/webapps/blacklab-server.war
+# COPY src/blacklab-frontend/target/*-frontend*.war /usr/local/tomcat/webapps/blacklab-frontend.war
 
 EXPOSE 8080
 

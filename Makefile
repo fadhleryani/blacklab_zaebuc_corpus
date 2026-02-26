@@ -5,10 +5,12 @@ compile: compile_backend compile_frontend
 compile_backend:
 	@echo "Compiling backend..."
 	@cd src/BlackLab && mvn clean install
+	@cp src/BlackLab/server/target/*.war src/blacklab-server.war
 
 compile_frontend:
 	@echo "Compiling frontend..."
 	@cd src/blacklab-frontend && mvn clean install
+	@cp src/blacklab-frontend/target/*-frontend*.war src/blacklab-frontend.war
 
 reindex_dev:
 	@echo "reindexing corpus..."
