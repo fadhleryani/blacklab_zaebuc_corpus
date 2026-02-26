@@ -67,7 +67,10 @@ annotatedFields:
       # 'gloss',
       # 'core_pgn',
       # 'pron_pgn',
-      # 'gloss_search'
+        
+    #   'clean_gloss',
+    #   'lemma_pos',
+    #   'expanded_gloss',
     # First annotation is the main annotation
     - name: expanded_gloss
       displayName: Expanded Gloss Search
@@ -94,9 +97,17 @@ annotatedFields:
       displayName: PoS
       valuePath: manual_pos/@class
       sensitivity: sensitive_insensitive
+    - name: lemma_pos
+      displayName: Lemma_PoS
+      valuePath: lemma_pos/@class
+      sensitivity: sensitive_insensitive
     - name: gloss
-      displayName: Gloss
+      displayName: _Gloss
       valuePath: gloss/@class
+      sensitivity: sensitive_insensitive
+    - name: clean_gloss
+      displayName: Gloss
+      valuePath: clean_gloss/@class
       sensitivity: sensitive_insensitive
     - name: core_pgn
       displayName: core_pgn

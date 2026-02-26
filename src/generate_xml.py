@@ -4,11 +4,11 @@ from lxml import etree
 import numpy as np
 
 def load_data(datadir):
-    en = pd.read_csv(f'{datadir}corrected.analyzed_en.tsv',sep='\t',index_col=[0,2,1])
-    ar = pd.read_csv(f'{datadir}corrected.analyzed_ar.tsv',sep='\t',index_col=[0,2,1])
+    en = pd.read_csv(f'{datadir}corrected.analyzed_en.tsv',sep='\t',index_col=[0,1],dtype=str)
+    ar = pd.read_csv(f'{datadir}corrected.analyzed_ar.tsv',sep='\t',index_col=[0,1],dtype=str)
     data = pd.concat([en,ar])
     data.columns = [x.lower() for x in data.columns]
-    documents = pd.read_csv(f'{datadir}documents.tsv',sep='\t',index_col=[0])
+    documents = pd.read_csv(f'{datadir}documents.tsv',sep='\t',index_col=[0],dtype=str)
     documents.columns = [x.lower() for x in documents.columns]
     return data, documents
 
@@ -51,7 +51,7 @@ def write_xml(data, metadata, out_path="../data/zaebuc_written.xml", sample=None
         # loop through lines "Line_Index" (think like sentences)
         for lineidx in linesidxs:
             line = etree.Element('sent')
-            line.attrib['idx'] = str(int(lineidx))
+            line.attrib['idx'] = str(int(float(lineidx)))
             doc.append(line)
 
             words = data.loc[(doc_id, lineidx)][:]
@@ -62,7 +62,7 @@ def write_xml(data, metadata, out_path="../data/zaebuc_written.xml", sample=None
                 # punct handled as separate tag
                 if words.loc[idx, 'manual_pos'] == 'PUNCT':
                     word = etree.Element('punct')
-                    word.attrib[f'{{{namespaces["xml"]}}}id'] = f'w.wx.{idx}'
+                    word.attrib[f'{{{namespaces["xml"]}}}id'] = f'w.wx.{int(float(idx))}'
                     word.text = words.loc[idx, 'word']
                     line.append(word)
                     continue
@@ -70,8 +70,8 @@ def write_xml(data, metadata, out_path="../data/zaebuc_written.xml", sample=None
                     word = etree.Element('word')
 
                 # set idx and xml:id attributes
-                word.attrib['idx'] = str(idx)
-                word.attrib[f'{{{namespaces["xml"]}}}id'] = f'w.wx.{idx}'
+                word.attrib['idx'] = str(int(float(idx)))
+                word.attrib[f'{{{namespaces["xml"]}}}id'] = f'w.wx.{int(float(idx))}'
 
                 # set english gloss as english lemma
                 if 'en' in doc_id:
@@ -96,12 +96,13 @@ def write_xml(data, metadata, out_path="../data/zaebuc_written.xml", sample=None
                     if analysisid == 'word':
                         analysis = etree.Element('text')
                         analysis.text = value
+                        word.append(analysis)
 
                     # split gloss into gloss_search elements
-                    elif analysisid == 'expanded_gloss':
+                    elif analysisid in {'expanded_gloss','clean_gloss'}:
                         for gloss in set(value):
                             gloss = gloss
-                            gloss_element = etree.Element("expanded_gloss")
+                            gloss_element = etree.Element(analysisid)
                             gloss_element.set('class', gloss)
                             word.append(gloss_element)
                             # continue
@@ -110,10 +111,11 @@ def write_xml(data, metadata, out_path="../data/zaebuc_written.xml", sample=None
                     elif not analysisid.startswith('_'):
                         analysis = etree.Element(analysisid)
                         analysis.attrib['class'] = value
+                        word.append(analysis)
                     else: # ignore columns starting with _
-                        pass
+                        # print(f"skipping {analysisid} for {doc_id} line {lineidx} word idx {idx}")
 
-                    word.append(analysis)
+                        pass
 
                 line.append(word)
 
